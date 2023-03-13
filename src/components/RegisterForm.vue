@@ -80,6 +80,21 @@
       </VeeField>
       <ErrorMessage class="text-red-600" name="country" />
     </div>
+    <!--Type of Music-->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Music Type</label>
+      <VeeField
+        as="select"
+        name="music_type"
+        class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+      >
+        <option value="Rock">Rock</option>
+        <option value="Pop">Pop</option>
+        <option value="Jazz">Jazz</option>
+        <option value="Classical">Classical</option>
+      </VeeField>
+      <ErrorMessage class="text-red-600" name="music_type" />
+    </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
       <VeeField
@@ -102,6 +117,9 @@
 </template>
 
 <script>
+import useUserStore from '@/stores/user'
+import { mapActions } from 'pinia'
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -111,12 +129,14 @@ export default {
         email: 'required|email|min:3|max:100',
         age: 'required|min_value:18|max_value:100',
         password: 'required|min:10|max:100|is_not:password',
-        confirm_password: 'password_mismatch:password',
+        confirm_password: 'password_mismatch:@password',
         country: 'required|is_not_country:Antarctica',
-        tos: 'tos'
+        tos: 'tos',
+        music_type: 'required'
       },
       userData: {
-        country: 'USA'
+        country: 'USA',
+        music_type: 'Rock'
       },
       reg_in_submission: false,
       reg_show_alert: false,
@@ -125,13 +145,30 @@ export default {
     }
   },
   methods: {
-    register(values) {
+    ...mapActions(useUserStore, {
+      createUser: 'register'
+    }),
+    async register(values) {
       this.reg_in_submission = true
       this.reg_show_alert = true
       this.reg_alert_msg = 'Please wait! Your account is being created.'
       this.reg_alert_variant = 'bg-blue-500'
 
-      console.log(values)
+      try {
+        await this.createUser(values)
+      } catch (error) {
+        this.reg_in_submission = false
+        this.reg_alert_variant = 'bg-red-500'
+        if (error.code === 'auth/email-already-in-use')
+          this.reg_alert_msg = 'Email already existed!'
+        else this.reg_alert_msg = 'An error occurred, please try again.'
+        return
+      }
+
+      this.reg_alert_variant = 'bg-green-500'
+      this.reg_alert_msg = 'Success! Your account has been created.'
+
+      window.location.reload()
     }
   }
 }
