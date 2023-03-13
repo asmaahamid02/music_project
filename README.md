@@ -1,6 +1,12 @@
 # music
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a music player, which is based on Vue3 and Vite.
+It includes the following features:
+
+- Vite
+- Pinia
+- Form Validation using VeeValidate
+- Authentication using Firebase
 
 ## Recommended IDE Setup
 
