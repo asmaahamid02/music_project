@@ -50,6 +50,7 @@ export default {
       uploads: []
     }
   },
+  emits: ['addSong'],
   methods: {
     upload($event) {
       this.is_dragover = false
@@ -103,7 +104,10 @@ export default {
             }
 
             song.url = await task.snapshot.ref.getDownloadURL()
-            await songsCollection.add(song)
+            const songRef = await songsCollection.add(song)
+            const songSnapshot = await songRef.get()
+
+            this.$emit('addSong', songSnapshot)
 
             this.uploads[uploadIndex].varient = 'bg-green-400'
             this.uploads[uploadIndex].icon = 'fas fa-check'
@@ -119,7 +123,8 @@ export default {
   },
   beforeUnmount() {
     //cancel request
-    this.uploads.forEach((upload) => upload.task.cancel())
+    // this.uploads.forEach((upload) => upload.task.cancel())
+    this.cancelUploads()
   }
   //   setup() {
   //     const is_dragover = ref(false)
