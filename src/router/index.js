@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ManageView from '@/views/ManageView.vue'
+import SongView from '@/views/SongView.vue'
 import useUserStore from '@/stores/user'
 
 const routes = [
@@ -22,7 +23,6 @@ const routes = [
     component: ManageView,
     beforeEnter: (to, from, next) => {
       console.log('Manage Rout Guard')
-
       next()
     },
     meta: {
@@ -33,6 +33,11 @@ const routes = [
     //better for SEO than aliases
     path: '/manage',
     redirect: { name: 'manage' }
+  },
+  {
+    path: '/song/:id',
+    name: 'song',
+    component: SongView
   },
   {
     path: '/:catchAll(.*)*',
