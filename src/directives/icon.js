@@ -17,6 +17,6 @@ export default {
       iconClass += ' text-green-400'
     }
 
-    el.innerHTML = `<i class="${iconClass}"></i>`
+    el.innerHTML += `<i class="${iconClass}"></i>`
   }
 }

@@ -15,21 +15,34 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">About</RouterLink>
+            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">{{
+              $t('header.about')
+            }}</RouterLink>
           </li>
           <li v-if="!userStore.userLoggedIn">
-            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
-              >Login / Register</a
-            >
+            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal">{{
+              $t('header.login_register')
+            }}</a>
           </li>
           <template v-else>
             <li>
-              <RouterLink :to="{ name: 'manage' }" class="px-2 text-white">Manage</RouterLink>
+              <RouterLink :to="{ name: 'manage' }" class="px-2 text-white">{{
+                $t('header.manage')
+              }}</RouterLink>
             </li>
             <li>
-              <a class="px-2 text-white" href="#" @click.prevent="signOut">Logout</a>
+              <a class="px-2 text-white" href="#" @click.prevent="signOut">{{
+                $t('header.logout')
+              }}</a>
             </li>
           </template>
+        </ul>
+        <ul class="ml-auto">
+          <li>
+            <a class="text-white px-2" href="#" @click.prevent="changeLang">
+              {{ current_local }}
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -39,12 +52,17 @@
 <script>
 import useModalStore from '@/stores/modal'
 import useUserStore from '@/stores/user'
-import { mapStores } from 'pinia'
+import useLocaleStore from '@/stores/locale'
+import { mapStores, mapActions } from 'pinia'
+// import { setLocale } from '@vee-validate/i18n'
 
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore, useUserStore)
+    ...mapStores(useModalStore, useUserStore, useLocaleStore),
+    current_local() {
+      return this.localeStore.locale === 'en' ? 'English' : 'العربية'
+    }
   },
   methods: {
     toggleAuthModal() {
@@ -55,7 +73,11 @@ export default {
 
       // if (this.$route.name === 'manage')
       if (this.$route.meta.requiresAuth) this.$router.push({ name: 'home' })
-    }
+    },
+    changeLang() {
+      this.changeLocale(this.localeStore.locale === 'en' ? 'ar' : 'en')
+    },
+    ...mapActions(useLocaleStore, ['changeLocale'])
   }
 }
 </script>
