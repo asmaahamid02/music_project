@@ -17,7 +17,7 @@ export default defineStore('user', {
         email: values.email,
         age: values.age,
         country: values.country,
-        music_type: values.music_type
+        genre: values.genre
       })
 
       await userCredentials.user.updateProfile({

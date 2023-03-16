@@ -1,0 +1,64 @@
+{
+  "home": {
+    "listen": "Listen to Great Music!",
+    "description": "Music is a free music streaming service that allows you to listen to millions of songs from around the world.",
+    "songs_text": "Songs"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Music is a free music streaming service that allows you to listen to millions of songs from around the world. We are a team of music lovers and we are committed to providing the best experience for music fans around the world."
+  },
+  "song": {
+    "comment_count": "No comments | (1) comment | ({count}) comments",
+    "comment": "comment",
+    "comment_placeholder": "Your comment here...",
+    "submit_comment": "Submit",
+    "latest": "Latest",
+    "oldest": "Oldest"
+  },
+  "auth": {
+    "accept": "I accept the Music's {0}",
+    "tos": "Terms of Service",
+    "name": "Name",
+    "email": "Email",
+    "country": "Country",
+    "genre": "Genre",
+    "age": "Age",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "register": "Register",
+    "login": "Login",
+    "title": "Your Account",
+    "submit": "Submit"
+  },
+  "header": {
+    "about": "About",
+    "manage": "Manage",
+    "login_register": "Login/Register",
+    "logout": "Logout"
+  },
+  "action_messages": {
+    "success": "Success",
+    "error": "An error occurred, please try again later.",
+    "email_already_exists": "This email is already registered.",
+    "wait": "Please wait!",
+    "registering": "Creating your account...",
+    "loging": "Logging you in...",
+    "login": "You have been logged in.",
+    "register": "Your account has been created.",
+    "adding_comment": "Adding your comment...",
+    "comment_added": "Your comment has been added.",
+    "updating_song": "Updating song info...",
+    "song_update": "Your song has been updated."
+  },
+  "manage": {
+    "title": "My Songs",
+    "upload": "Upload",
+    "drop": "Drop your songs here",
+    "song_title": "Song Title",
+    "genre": "Genre",
+    "submit_update": "Update",
+    "go_back": "Go Back",
+    "unsaved_changes": "You have unsaved changes, are you sure you want to leave?"
+  }
+}

@@ -5,14 +5,13 @@
     <!-- Main Content -->
     <section class="container mx-auto">
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-        <div
-          class="px-6 pt-6 pb-5 font-bold border-b border-gray-200"
-          v-icon-secondary="{ icon: 'headphones-alt', right: true }"
-        >
-          <span class="card-title">Songs</span>
+        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+          <span class="card-title text-xl text-yellow-400">{{ $t('home.songs_text') }}</span>
           <!-- Icon -->
           <!--the icon becomes a directive-->
           <!--Global: v-icon.right.yellow="'headphones-alt'"-->
+          <!--locally:  v-icon-secondary="{ icon: 'headphones-alt', right: true }"-->
+          <span v-icon-secondary="{ icon: 'headphones-alt', right: true }"></span>
         </div>
         <!-- Playlist -->
         <ol id="playlist">
@@ -39,10 +38,7 @@ export default {
     return {
       songs: [],
       maxPerPage: 25,
-      pendingRequests: false,
-      title: 'Listen to Great Music!',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et dolor mollis, congue augue non, venenatis elit. Nunc justo eros, suscipit ac aliquet imperdiet, venenatis et sapien. Duis sed magna pulvinar, fringilla lorem eget, ullamcorper urna.'
+      pendingRequests: false
     }
   },
   directives: {
@@ -55,6 +51,14 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
+  },
+  computed: {
+    title() {
+      return this.$t('home.listen')
+    },
+    description() {
+      return this.$t('home.description')
+    }
   },
   methods: {
     handleScroll() {

@@ -19,6 +19,7 @@
           <!-- Song Info -->
           <div class="text-3xl font-bold">{{ song.modified_name }}</div>
           <div>{{ song.genre }}</div>
+          <div class="song-price">{{ $n(10, 'currency') }}</div>
         </div>
       </div>
     </section>
@@ -27,7 +28,7 @@
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
         <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
           <!-- Comment Count -->
-          <span class="card-title">Comments ({{ song.comment_count }})</span>
+          <span class="card-title">{{ $tc('song.comment_count', song.comment_count) }}</span>
           <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
         </div>
         <div class="p-6">
@@ -43,7 +44,7 @@
               as="textarea"
               name="comment"
               class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4"
-              placeholder="Your comment here..."
+              :placeholder="$t('song.comment_placeholder')"
             ></VeeField>
             <ErrorMessage class="text-red-600" name="comment" />
             <button
@@ -51,7 +52,7 @@
               class="py-1.5 px-3 rounded text-white bg-green-600 block"
               :disabled="comment_in_submission"
             >
-              Submit
+              {{ $t('song.submit_comment') }}
             </button>
           </VeeForm>
           <!-- Sort Comments -->
@@ -59,8 +60,8 @@
             v-model="sort"
             class="block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
           >
-            <option value="1">Latest</option>
-            <option value="2">Oldest</option>
+            <option value="1">{{ $t('song.latest') }}</option>
+            <option value="2">{{ $t('song.oldest') }}</option>
           </select>
         </div>
       </div>
@@ -75,7 +76,7 @@
         <!-- Comment Author -->
         <div class="mb-5">
           <div class="font-bold">{{ comment.name }}</div>
-          <time>{{ comment.datePosted }}</time>
+          <time>{{ new Date(comment.datePosted).toLocaleDateString() }}</time>
         </div>
 
         <p>
@@ -103,7 +104,7 @@ export default {
       comment_in_submission: false,
       comment_show_alert: false,
       comment_alert_variant: 'bg-blue-500',
-      comment_alert_text: 'Please wait! Your comment is being submitted.',
+      comment_alert_text: '',
       comments: [],
       sort: '1' //latest to oldest
     }
@@ -145,7 +146,9 @@ export default {
       this.comment_in_submission = true
       this.comment_show_alert = true
       this.comment_alert_variant = 'bg-blue-500'
-      this.comment_alert_text = 'Please wait! Your comment is being submitted.'
+      this.comment_alert_text = `${this.$t('action_messages.wait')} ${this.$t(
+        'action_messages.adding_comment'
+      )}`
 
       const comment = {
         content: values.comment,
@@ -166,7 +169,9 @@ export default {
 
       this.comment_in_submission = false
       this.comment_alert_variant = 'bg-green-500'
-      this.comment_alert_text = 'Comment is added!'
+      this.comment_alert_text = `${this.$t('action_messages.success')} ${this.$t(
+        'action_messages.comment_added'
+      )}`
 
       resetForm()
     },

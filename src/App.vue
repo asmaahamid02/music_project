@@ -1,8 +1,9 @@
 <template>
   <AppHeader />
 
+  <!--route transition-->
   <RouterView v-slot="{ Component }">
-    <Transition name="fade" mpde="out-in">
+    <Transition name="fade" mode="out-in">
       <component :is="Component"> </component>
     </Transition>
   </RouterView>
@@ -16,7 +17,8 @@ import AppHeader from './components/AppHeader.vue'
 import AppAuth from './components/AppAuth.vue'
 import SongPlayer from './components/SongPlayer.vue'
 import useUserStore from '@/stores/user'
-import { mapWritableState } from 'pinia'
+import useLocaleStore from '@/stores/locale'
+import { mapWritableState, mapActions } from 'pinia'
 import { auth } from '@/includes/firebase'
 
 export default {
@@ -27,12 +29,18 @@ export default {
     SongPlayer
   },
   computed: {
-    ...mapWritableState(useUserStore, ['userLoggedIn'])
+    ...mapWritableState(useUserStore, ['userLoggedIn']),
+    ...mapWritableState(useLocaleStore, ['locale'])
+  },
+  methods: {
+    ...mapActions(useLocaleStore, ['changeLocale'])
   },
   created() {
     if (auth.currentUser) {
       this.userLoggedIn = true
     }
+    const savedLocale = localStorage.getItem('locale') || 'en'
+    if (this.locale !== savedLocale) this.changeLocale(savedLocale)
   }
 }
 </script>
