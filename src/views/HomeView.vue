@@ -15,7 +15,7 @@
         </div>
         <!-- Playlist -->
         <ol id="playlist">
-          <SongItem v-for="song in songs" :key="song.docID" :song="song" />
+          <SongItem v-for="song in songs" :key="song.docID" :song="song" @like="like" />
         </ol>
         <!-- .. end Playlist -->
       </div>
@@ -23,7 +23,7 @@
   </main>
 </template>
 <script>
-import { songsCollection } from '@/includes/firebase'
+import { songsCollection, likesCollection, auth } from '@/includes/firebase'
 import AppInroduction from '../components/AppInroduction.vue'
 import SongItem from '../components/SongItem.vue'
 import IconSecondary from '@/directives/icon_secondary'
@@ -92,14 +92,30 @@ export default {
         snapshots = await songsCollection.orderBy('modified_name').limit(this.maxPerPage).get()
       }
 
-      snapshots.forEach((document) => {
+      snapshots.forEach(async (document) => {
+        const isLikedByUser = await likesCollection
+          .where('uid', '==', auth.currentUser.uid)
+          .where('sid', '==', document.id)
+          .get()
+
         this.songs.push({
           docID: document.id,
+          liked: isLikedByUser.empty ? false : true,
           ...document.data()
         })
       })
 
       this.pendingRequests = false
+    },
+    like(docID) {
+      let song = this.songs.find((song) => song.docID === docID)
+      song.liked = !song.liked
+
+      if (song.liked) {
+        song.like_count++
+      } else {
+        song.like_count--
+      }
     }
   }
 }

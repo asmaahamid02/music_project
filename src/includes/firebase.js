@@ -22,5 +22,6 @@ db.enablePersistence().catch((error) => console.log(`Firebase persistence error 
 const usersCollection = db.collection('users')
 const songsCollection = db.collection('songs')
 const commentsCollection = db.collection('comments')
+const likesCollection = db.collection('likes')
 
-export { auth, db, usersCollection, songsCollection, commentsCollection, storage }
+export { auth, db, usersCollection, songsCollection, commentsCollection, likesCollection, storage }
