@@ -62,6 +62,19 @@ export default {
           return
         }
 
+        if (!navigator.onLine) {
+          this.uploads.push({
+            task: {},
+            current_progress: 100,
+            name: file.name,
+            varient: 'bg-red-400',
+            icon: 'fas fa-times',
+            text_class: 'text-red-400',
+            transition: ''
+          })
+          return
+        }
+
         const storageRef = storage.ref() //return: music-79fd8.appspot.com
         const songsRef = storageRef.child(`songs/${file.name}`) //music-79fd8.appspot.com/songs/example.mp3
 
