@@ -158,22 +158,30 @@ export default {
         uid: auth.currentUser.uid
       }
 
-      await commentsCollection.add(comment)
+      try {
+        await commentsCollection.add(comment)
 
-      this.song.comment_count += 1
-      await songsCollection.doc(this.$route.params.id).update({
-        comment_count: this.song.comment_count
-      })
+        this.song.comment_count += 1
+        await songsCollection.doc(this.$route.params.id).update({
+          comment_count: this.song.comment_count
+        })
 
-      this.getComments()
+        this.getComments()
 
-      this.comment_in_submission = false
-      this.comment_alert_variant = 'bg-green-500'
-      this.comment_alert_text = `${this.$t('action_messages.success')} ${this.$t(
-        'action_messages.comment_added'
-      )}`
+        this.comment_in_submission = false
+        this.comment_alert_variant = 'bg-green-500'
+        this.comment_alert_text = `${this.$t('action_messages.success')} ${this.$t(
+          'action_messages.comment_added'
+        )}`
 
-      resetForm()
+        resetForm()
+      } catch (error) {
+        this.comment_in_submission = false
+        this.comment_alert_variant = 'bg-red-500'
+        this.comment_alert_text = `${this.$t('action_messages.error')} ${this.$t(
+          'action_messages.comment_not_added'
+        )}`
+      }
     },
     async getComments() {
       const snapshots = await commentsCollection.where('sid', '==', this.$route.params.id).get()

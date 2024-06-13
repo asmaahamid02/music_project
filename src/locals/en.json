@@ -48,6 +48,7 @@
     "register": "Your account has been created.",
     "adding_comment": "Adding your comment...",
     "comment_added": "Your comment has been added.",
+    "comment_not_added": "Your comment could not be added.",
     "updating_song": "Updating song info...",
     "song_update": "Your song has been updated."
   },

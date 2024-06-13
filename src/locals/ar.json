@@ -48,6 +48,7 @@
     "register": "تم إنشاء حسابك",
     "adding_comment": "يتم إضافة تعليقك...",
     "comment_added": "تم إضافة تعليقك",
+    "comment_not_added": "لم يتم إضافة تعليقك",
     "updating_song": "يتم تحديث الأغنية...",
     "song_update": "تم تحديث الأغنية"
   },
