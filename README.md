@@ -8,13 +8,9 @@ It includes the following features:
 - Form Validation using VeeValidate
 - Authentication using Firebase
 
-## Recommended IDE Setup
+## Live Site
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[Music Player](https://music-project-neon.vercel.app/)
 
 ## Project Setup
 
@@ -54,10 +50,4 @@ But it's still recommended to test the production build with `test:e2e` before d
 ```sh
 npm run build
 npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
