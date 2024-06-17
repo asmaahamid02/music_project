@@ -1,12 +1,27 @@
 # music
 
 This project is a music player, which is based on Vue3 and Vite.
-It includes the following features:
+It covers the below concepts:
 
+- Vue3
 - Vite
 - Pinia
+- Option API
+- Lifecycle Hooks
 - Form Validation using VeeValidate
 - Authentication using Firebase
+- Routing using Vue Router && Navigation Guards
+- Upload Files to Firebase Storage
+- Upload/Manage songs to Firebase Firestore/Storage
+- Play Audio using Howler.js
+- Vue Directives
+- Internationalization using vue-i18n (English, Arabic)
+- PWA and Offline Support using Workbox
+- Optimizations for Production (Dynamic Imports, Code Coverage, Progress bar, Rollup visualizer)
+- Error Handling
+- Deployment to Vercel
+- Unit/Snapshot Testing using Vitest
+- E2E Testing using Cypress
 
 ## Live Site
 
