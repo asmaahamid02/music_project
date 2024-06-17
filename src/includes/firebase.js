@@ -3,6 +3,8 @@ import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 import 'firebase/compat/storage'
 
+import { getAuth } from 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyCCRdhlsg2rmZPHBRTyqYEIKAxNtUUfbKM',
   authDomain: 'music-79fd8.firebaseapp.com',
@@ -13,7 +15,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-const auth = firebase.auth()
+const auth = getAuth()
+// const auth = firebase.auth()
 const db = firebase.firestore()
 const storage = firebase.storage()
 
