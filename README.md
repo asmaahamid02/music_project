@@ -1,7 +1,8 @@
-# music
+# Music
 
-This project is a music player, which is based on Vue3 and Vite.
-It covers the below concepts:
+>Music Player app that allows users to listen to, upload and comment on songs. It is built with VueJs.
+
+## Features
 
 - Vue3
 - Vite
